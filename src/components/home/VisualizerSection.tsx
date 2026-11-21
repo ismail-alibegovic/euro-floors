@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { DEFAULT_PRESET, presets } from "@/data/visualizer";
 
 /**
@@ -66,7 +66,7 @@ export function VisualizerSection() {
         onPointerDown={onDown}
         onPointerUp={onUp}
         onPointerCancel={() => (drag.current = null)}
-        className="relative mt-10 h-[var(--w)] touch-pan-y select-none focus-visible:outline-offset-[-1px] md:mt-[clamp(2.5rem,4vw,4rem)] [--s:76vw] [--w:68vw] md:[--s:49.5vw] md:[--w:28vw]"
+        className="relative mt-10 h-[var(--w)] touch-pan-y select-none focus-visible:outline-offset-[-1px] md:mt-[clamp(2.5rem,4vw,4rem)] [--s:100vw] [--w:calc(100vw-2*var(--gutter))] md:[--s:49.5vw] md:[--w:28vw]"
       >
         {presets.map((p, i) => {
           let off = i - active;
@@ -83,7 +83,7 @@ export function VisualizerSection() {
               aria-label={isActive ? undefined : `${off < 0 ? "Prethodni" : "Sljedeći"} pod: ${p.name}`}
               onClick={() => !isActive && go(i)}
               className={`absolute top-0 block h-[var(--w)] w-[var(--w)] overflow-hidden transition-[transform,filter,opacity] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                isActive ? "cursor-default" : "cursor-pointer"
+                isActive ? "cursor-default" : "cursor-pointer max-md:pointer-events-none max-md:opacity-0!"
               }`}
               style={{
                 left: "calc(50% - var(--w) / 2)",
@@ -114,13 +114,21 @@ export function VisualizerSection() {
             </p>
             <p className="text-bone/70">Šest vrsta poda u istom prostoru — uporedite tonove i uzorke prije nego što odlučite.</p>
           </div>
+          <div className="flex shrink-0 items-center gap-1">
+          <button type="button" onClick={() => go(active - 1)} aria-label="Prethodni pod" className="flex h-11 w-11 items-center justify-center border border-line-strong md:hidden">
+            <ArrowLeft size={17} strokeWidth={1.25} />
+          </button>
+          <button type="button" onClick={() => go(active + 1)} aria-label="Sljedeći pod" className="flex h-11 w-11 items-center justify-center border border-line-strong md:hidden">
+            <ArrowRight size={17} strokeWidth={1.25} />
+          </button>
           <Link
             href={`/vizualizator?pod=${cur.id}`}
             aria-label={`Otvorite vizualizator: ${cur.name}`}
-            className="group -mb-2 -mr-2 flex h-11 w-11 shrink-0 items-center justify-center"
+            className="group -mr-2 flex h-11 w-11 shrink-0 items-center justify-center"
           >
             <ArrowUpRight size={20} strokeWidth={1} className="text-brass transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
+          </div>
         </div>
         <div className="border-b border-line" />
       </div>

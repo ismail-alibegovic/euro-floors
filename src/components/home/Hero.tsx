@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { FitText } from "../FitText";
 import { IdeaBar } from "./IdeaBar";
 
 /**
@@ -55,7 +54,8 @@ export function Hero() {
         {/* Oversized hairline word, with the reference's thin rule above it */}
         <div className="pointer-events-none mt-auto pt-16" aria-hidden="true">
           <div className="hero-fade border-t border-bone/10 pt-[1.2vw]" style={{ ["--d" as string]: "500ms" }}>
-            <FitText text="Parket" estimate="23.5vw" className="giant -mb-[0.04em] pb-[0.02em]" />
+            {/* sized like the reference's HARMONIOUS rather than stretched to fill the width */}
+            <span className="giant -mb-[0.03em] block pb-[0.02em] text-center text-[19vw] tracking-[0.02em] md:text-[15vw]">Parket</span>
           </div>
         </div>
       </div>

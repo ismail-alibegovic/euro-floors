@@ -71,8 +71,13 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
 
   return (
     <>
-      <div className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 border-l border-t border-line lg:grid-cols-3">
         {cells.map((c, i) => {
+          // Phones use 2 columns with text cells full width; an image left alone in its row spans both.
+          let col = 0;
+          for (let k = 0; k < i; k++) col = cells[k].kind === "text" ? 0 : (col + 1) % 2;
+          const next = cells[i + 1];
+          const lone = c.kind === "img" && col === 0 && (!next || next.kind === "text");
           if (c.kind === "empty") return <div key={i} className="hidden border-b border-r border-line lg:block" aria-hidden="true" />;
           if (c.kind === "text") {
             const right = c.align === "right";
@@ -90,7 +95,7 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
                 {arrow}
               </>
             );
-            const cls = "group flex min-h-[190px] flex-col justify-between gap-10 border-b border-r border-line p-[clamp(1.5rem,3vw,2.6rem)] sm:aspect-square sm:min-h-0";
+            const cls = "group col-span-2 flex min-h-[150px] flex-col justify-between gap-8 border-b border-r border-line p-[clamp(1.25rem,3vw,2.6rem)] sm:col-span-1 sm:aspect-square sm:min-h-0";
             return c.href ? (
               <Link key={i} href={c.href} className={cls}>{inner}</Link>
             ) : (
@@ -99,7 +104,7 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
           }
           const it = items[c.item];
           return (
-            <div key={i} className="flex items-center justify-center border-b border-r border-line p-[12.5%] sm:aspect-square">
+            <div key={i} className={`flex items-center justify-center border-b border-r border-line p-3 sm:aspect-square md:p-[12.5%] ${lone ? "max-sm:col-span-2" : ""}`}>
               <button
                 type="button"
                 onClick={(e) => {
@@ -109,7 +114,7 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
                 className="group block w-full"
                 aria-label={`Uvećaj: ${it.title}`}
               >
-                <span className="soft-media block aspect-square w-full" data-curtain="" style={{ ["--soft" as string]: c.soft ? "4px" : "2.5px" }}>
+                <span className={`soft-media block w-full ${lone ? "aspect-[4/3] sm:aspect-square" : "aspect-square"}`} data-curtain="" style={{ ["--soft" as string]: c.soft ? "4px" : "2.5px" }}>
                   <span className="soft-glow">
                     <Image src={it.src} alt="" fill sizes="(min-width:1024px) 25vw, (min-width:640px) 37vw, 75vw" quality={70} className="object-cover" />
                   </span>
