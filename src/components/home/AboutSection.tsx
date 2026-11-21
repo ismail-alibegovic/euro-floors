@@ -7,7 +7,7 @@ export function AboutSection() {
     <section aria-labelledby="about-title" className="border-b border-line">
       <div className="grid lg:grid-cols-[22fr_78fr]">
         <div className="flex items-start justify-between gap-6 border-line px-[var(--gutter)] pb-4 pt-12 lg:flex-col lg:justify-start lg:gap-8 lg:border-r lg:px-[5%] lg:pt-16">
-          <h2 id="about-title" className="text-[12px] text-bone/85">O Euro-Floorsu</h2>
+          <h2 id="about-title" className="text-[13px] text-brass sm:text-[12px] sm:text-bone/85">O Euro-Floorsu</h2>
           <Link href="/o-nama" aria-label="Saznajte više o nama" className="-m-3 flex h-11 w-11 items-center justify-center text-bone/75 transition-transform hover:-translate-y-0.5 hover:translate-x-0.5 hover:text-brass">
             <ArrowUpRight size={18} strokeWidth={1} />
           </Link>

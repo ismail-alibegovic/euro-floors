@@ -25,10 +25,10 @@ export function SiteFooter() {
           ovdje.
         </p>
         <div className="flex flex-col gap-3 md:items-end md:text-right" data-reveal="">
-          <p className="max-w-[32ch] text-[12px] leading-[1.4] text-bone/75">
+          <p className="max-w-[32ch] text-[14px] leading-[1.45] text-bone/75 sm:text-[12px] sm:leading-[1.4]">
             Pošaljite mjere i ideju — predložit ćemo pod i pripremiti ponudu za materijal i ugradnju.
           </p>
-          <Link href="/kontakt" className="inline-flex w-fit items-center gap-2 py-2 text-[11.5px] text-bone hover:text-brass">
+          <Link href="/kontakt" className="mt-2 inline-flex min-h-12 w-full items-center justify-between gap-2 bg-bone px-5 text-[14px] text-ink transition-transform duration-150 active:scale-[0.98] sm:mt-0 sm:min-h-0 sm:w-fit sm:justify-start sm:bg-transparent sm:px-0 sm:py-2 sm:text-[11.5px] sm:text-bone hover:text-brass">
             Zatražite ponudu <ArrowUpRight size={15} strokeWidth={1} />
           </Link>
         </div>
@@ -48,7 +48,7 @@ export function SiteFooter() {
       </div>
 
       {/* contact strip */}
-      <div className="grid gap-6 border-t border-line px-[var(--gutter)] py-8 text-[12px] text-bone/70 sm:grid-cols-2 lg:grid-cols-4 lg:px-[2.4%]">
+      <div className="grid gap-6 border-t border-line px-[var(--gutter)] py-8 text-[14px] text-bone/70 sm:text-[12px] sm:grid-cols-2 lg:grid-cols-4 lg:px-[2.4%]">
         <div>
           <p className="text-bone/40">Telefon</p>
           {site.phones.map((p) => (
@@ -67,7 +67,7 @@ export function SiteFooter() {
           {secondaryNav.map((n) => (
             <Link key={n.href} href={n.href} className="py-1.5 hover:text-bone">{n.label}</Link>
           ))}
-          <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="py-1.5 hover:text-bone">Facebook ↗</a>
+          <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1.5 hover:text-bone">Facebook <ArrowUpRight aria-hidden="true" size={13} strokeWidth={1.25} /></a>
         </div>
       </div>
 

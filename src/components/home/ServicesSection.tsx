@@ -31,7 +31,7 @@ export function ServicesSection() {
             <br />
             mjestu.
           </h2>
-          <p className="mt-6 max-w-[30ch] text-[12px] leading-[1.4] text-bone/70 lg:ml-auto">
+          <p className="mt-6 max-w-[30ch] text-[14px] leading-[1.45] text-bone/70 sm:text-[12px] sm:leading-[1.4] lg:ml-auto">
             Od izbora i nabavke do ugradnje i završne obrade — Euro-Floors vodi cijeli posao oko vašeg poda.
           </p>
         </div>
@@ -40,10 +40,17 @@ export function ServicesSection() {
       <ul className="relative" onMouseLeave={() => setHover(null)}>
         {rows.map((s, i) => (
           <li key={s.slug} className="relative border-t border-line" onMouseEnter={() => setHover(i)}>
-            <Link href={`/usluge#${s.slug}`} className="group flex items-center justify-between gap-6 px-[var(--gutter)] py-6 lg:px-[2.4%] lg:py-7">
-              <span className="min-w-0">
-                <span className="block text-[clamp(1.05rem,1.45vw,1.35rem)] tracking-[-0.02em] text-bone transition-colors group-hover:text-brass">{s.title}</span>
-                <span className="mt-1.5 block max-w-[80ch] text-[11.5px] text-bone/60">{s.short}</span>
+            <Link href={`/usluge#${s.slug}`} className="group flex items-center justify-between gap-4 px-[var(--gutter)] py-5 transition-colors duration-150 active:bg-ink-2 sm:gap-6 sm:py-6 lg:px-[2.4%] lg:py-7">
+              {/* touch screens have no hover photo, so each row carries its own thumbnail */}
+              <span className="relative h-16 w-16 shrink-0 overflow-hidden bg-ink-2 [@media(hover:hover)_and_(pointer:fine)]:hidden">
+                <Image src={IMAGES[s.slug]} alt="" fill sizes="64px" quality={70} className="object-cover" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="flex items-baseline gap-2.5">
+                  <span aria-hidden="true" className="text-[11px] tabular-nums text-brass/80 [@media(hover:hover)_and_(pointer:fine)]:hidden">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="block text-[clamp(1.1rem,1.45vw,1.35rem)] leading-[1.15] tracking-[-0.02em] text-bone transition-colors group-hover:text-brass">{s.title}</span>
+                </span>
+                <span className="mt-1.5 line-clamp-2 block max-w-[80ch] text-[13px] leading-[1.4] text-bone/60 sm:text-[11.5px]">{s.short}</span>
               </span>
               <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1} className="shrink-0 text-bone/60 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brass" />
             </Link>

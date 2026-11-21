@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { RevealObserver } from "@/components/RevealObserver";
+import { MobileActionBar } from "@/components/MobileActionBar";
 import { site } from "@/data/site";
 
 // Geist: neo-grotesk with a true Thin (100) for the oversized words and full latin-ext (č ć š ž đ).
@@ -92,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="sadrzaj">{children}</main>
         <SiteFooter />
+        <MobileActionBar />
       </body>
     </html>
   );

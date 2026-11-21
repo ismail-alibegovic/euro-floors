@@ -38,6 +38,8 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* arrows and other symbols render as text glyphs, never as colour emoji (iOS/Android) */
+  font-variant-emoji: text;
 }
 
 /* Lenis */

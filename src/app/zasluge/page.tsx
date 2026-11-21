@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
 import { credits } from "@/data/credits";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -22,7 +23,7 @@ export default function CreditsPage() {
             <li key={c.file} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[1fr_1fr_auto] sm:gap-6">
               <span className="text-bone/80">{c.use}</span>
               <a href={c.authorUrl} target="_blank" rel="noopener noreferrer" className="text-bone hover:text-brass">{c.author}</a>
-              <a href={c.photoUrl} target="_blank" rel="noopener noreferrer" className="text-mute hover:text-bone">Unsplash ↗</a>
+              <a href={c.photoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-mute hover:text-bone">Unsplash <ArrowUpRight aria-hidden="true" size={13} strokeWidth={1.25} /></a>
             </li>
           ))}
         </ul>

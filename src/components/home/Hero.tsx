@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { FitText } from "../FitText";
 import { HeroSearch } from "./HeroSearch";
 
@@ -34,16 +35,27 @@ export function Hero() {
                 </span>
               ))}
             </h1>
-            <p className="hero-fade max-w-[30ch] pt-1 text-[12px] leading-[1.35] text-bone/85 sm:pt-3 sm:text-right" style={{ ["--d" as string]: "800ms" }}>
+            <p className="hero-fade max-w-[34ch] pt-1 text-[14px] leading-[1.45] text-bone/85 sm:max-w-[30ch] sm:pt-3 sm:text-right sm:text-[12px] sm:leading-[1.35]" style={{ ["--d" as string]: "800ms" }}>
               Euro-Floors donosi prirodne materijale u vaš prostor — masivni i troslojni parket, egzotične vrste i laminate, s ugradnjom u Sarajevu.
             </p>
           </div>
           <div className="hero-fade mt-6 sm:mt-7" style={{ ["--d" as string]: "1000ms" }}>
             <HeroSearch />
           </div>
-          <div className="hero-fade mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[11.5px] text-bone/55" style={{ ["--d" as string]: "1150ms" }}>
-            <Link href="/kolekcije" className="py-1.5 hover:text-bone">Istražite kolekcije ↗</Link>
-            <Link href="/#vizualizator" className="py-1.5 hover:text-bone">Isprobajte pod u svom prostoru ↗</Link>
+          <div className="hero-fade mt-4 flex flex-wrap gap-2 text-[13px] text-bone/80 sm:mt-3 sm:gap-x-5 sm:gap-y-1 sm:text-[11.5px] sm:text-bone/55" style={{ ["--d" as string]: "1150ms" }}>
+            {[
+              { href: "/kolekcije", label: "Istražite kolekcije" },
+              { href: "/#vizualizator", label: "Isprobajte pod u svom prostoru" },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="inline-flex min-h-10 items-center gap-1.5 border border-white/12 bg-ink/35 px-3.5 backdrop-blur-sm transition-[transform,color] duration-150 active:scale-[0.97] sm:min-h-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-1.5 sm:backdrop-blur-none hover:text-bone"
+              >
+                {l.label}
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.25} className="text-brass" />
+              </Link>
+            ))}
           </div>
         </div>
 

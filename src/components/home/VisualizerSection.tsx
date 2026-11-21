@@ -137,14 +137,14 @@ export function VisualizerSection() {
           </div>
 
           <div className="mx-auto mt-8 flex max-w-[640px] items-end justify-between gap-6">
-            <p className="max-w-[30ch] text-[12px] leading-[1.4] text-bone/75">
+            <p className="max-w-[30ch] text-[14px] leading-[1.45] text-bone/75 sm:text-[12px] sm:leading-[1.4]">
               Jedan prostor, šest podova. Uporedite vrste parketa i pronađite pod koji odgovara vašem enterijeru.
             </p>
             <Link href={`/vizualizator?pod=${cur.id}`} aria-label="Otvorite vizualizator" className="flex h-11 w-11 shrink-0 items-center justify-center text-bone/80 transition-transform hover:-translate-y-0.5 hover:translate-x-0.5 hover:text-brass">
               <ArrowUpRight size={20} strokeWidth={1} />
             </Link>
           </div>
-          <p className="mx-auto mt-3 max-w-[640px] text-[10.5px] text-bone/35">Ilustrativni prikaz — mijenja se samo pod.</p>
+          <p className="mx-auto mt-3 max-w-[640px] text-[11.5px] text-bone/40 sm:text-[10.5px] sm:text-bone/35">Ilustrativni prikaz — mijenja se samo pod.</p>
         </div>
 
         <div className="relative hidden overflow-hidden border-l border-line lg:block">
