@@ -61,7 +61,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ kateg
               <Link href={`/kolekcije/${c.slug}/${p.slug}`} className="group grid items-center gap-4 py-6 sm:grid-cols-[3rem_8rem_1fr_auto] md:py-8">
                 <span className="caption hidden sm:block">{String(i + 1).padStart(2, "0")}</span>
                 <span className="media-zoom relative hidden aspect-[4/3] overflow-hidden sm:block">
-                  <Image src={p.images[0].src} alt="" fill sizes="128px" quality={60} className="object-cover" />
+                  <Image src={p.images[0].src} alt="" fill sizes="128px" quality={70} className="object-cover" />
                 </span>
                 <span>
                   <span className="block text-[clamp(1.3rem,2.4vw,2.1rem)] font-normal leading-tight tracking-[-0.03em] transition-colors group-hover:text-brass">{p.name}</span>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function ContactPage({
   searchParams,
 }: {
-  searchParams: Promise<{ pod?: string; kategorija?: string; proizvod?: string }>;
+  searchParams: Promise<{ pod?: string; kategorija?: string; proizvod?: string; poruka?: string }>;
 }) {
   const sp = await searchParams;
   // Only accept product names that exist in the catalog.
@@ -23,10 +23,10 @@ export default async function ContactPage({
   return (
     <>
       <PageHeader kicker="Kontakt" title={["Imate prostor", "na umu?"]} lead="Recite nam šta planirate. Zajedno ćemo pronaći odgovarajući pod." />
-      <section className="shell grid gap-16 py-16 md:grid-cols-12 md:py-24">
+      <section id="ponuda" className="shell grid scroll-mt-24 gap-16 py-16 md:grid-cols-12 md:py-24">
         <div className="md:col-span-7">
           <h2 className="kicker mb-8">Upit za ponudu</h2>
-          <QuoteForm preset={sp.pod} initialType={sp.kategorija} product={product} />
+          <QuoteForm preset={sp.pod} initialType={sp.kategorija} product={product} message={typeof sp.poruka === "string" ? sp.poruka : undefined} />
         </div>
         <aside className="md:col-span-4 md:col-start-9">
           <h2 className="kicker mb-6">Direktno</h2>

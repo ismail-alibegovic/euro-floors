@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -7,11 +7,13 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { RevealObserver } from "@/components/RevealObserver";
 import { site } from "@/data/site";
 
-// Geist: neo-grotesk with a true Thin (100) for the oversized words and full latin-ext (č ć š ž đ).
-const geist = Geist({
+// Inter (variable, with the optical-size axis): at display sizes it switches to Inter Display,
+// the closest freely licensed match to the reference's Helvetica-style grotesk, incl. a true Thin
+// for the oversized words, with full latin-ext (č ć š ž đ).
+const inter = Inter({
   subsets: ["latin", "latin-ext"],
-  weight: ["100", "200", "300", "400", "500"],
-  variable: "--font-geist",
+  axes: ["opsz"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
 
 // Site is dark-only, so one theme-color matches the top of every page.
 export const viewport: Viewport = {
-  themeColor: "#0b0906",
+  themeColor: "#100b03",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -78,7 +80,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="bs" className={geist.variable} suppressHydrationWarning>
+    <html lang="bs" className={inter.variable} suppressHydrationWarning>
       <head>
         <script
           // Marks JS as available so motion styles can hide-then-reveal. Without JS everything stays visible.

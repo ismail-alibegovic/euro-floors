@@ -56,20 +56,20 @@ export function SiteHeader() {
       >
         Preskoči na sadržaj
       </a>
-      <div className="shell flex h-[var(--header-h)] items-center justify-between gap-6">
-        <Link href="/" className="relative z-[61] py-3" aria-label="Euro-Floors, početna">
+      <div className="shell grid h-[var(--header-h)] grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
+        <Link href="/" className="relative z-[61] w-fit py-3" aria-label="Euro-Floors, početna">
           <Logo />
         </Link>
 
         <nav aria-label="Glavna navigacija" className="hidden lg:block">
-          <ul className="flex items-center text-[13px] text-bone/80">
+          <ul className="flex items-center text-[12px] text-bone/85">
             {nav.map((item, i) => (
               <li key={item.href} className="flex items-center">
-                {i > 0 && <span aria-hidden="true" className="mx-5 text-bone/25">/</span>}
+                {i > 0 && <span aria-hidden="true" className="mx-[clamp(1.25rem,2.6vw,2.75rem)] text-bone/30">/</span>}
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`py-3 transition-colors hover:text-bone ${isActive(item.href) ? "text-brass" : ""}`}
+                  className={`py-3 transition-colors hover:text-brass ${isActive(item.href) ? "text-brass" : ""}`}
                 >
                   {item.label}
                 </Link>
@@ -78,9 +78,10 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link href="/kontakt" className="link-arrow hidden text-[13px] lg:inline-flex">
-            Kontakt <ArrowUpRight size={15} strokeWidth={1.25} className="text-brass" />
+        <div className="flex items-center justify-end gap-3">
+          <Link href="/kontakt" className="group hidden items-center gap-3 py-3 text-[12px] lg:inline-flex">
+            Kontakt
+            <ArrowUpRight size={20} strokeWidth={1} className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brass" />
           </Link>
           <button
             ref={btnRef}
@@ -88,7 +89,7 @@ export function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="relative z-[61] -mr-2 flex h-11 min-w-11 items-center justify-center gap-3 px-2 text-[13px] lg:hidden"
+            className="relative z-[61] -mr-2 flex h-11 min-w-11 items-center justify-center gap-3 px-2 text-[12px] lg:hidden"
           >
             <span>{open ? "Zatvori" : "Meni"}</span>
             <span aria-hidden="true" className="relative block h-3 w-6">

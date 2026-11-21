@@ -13,10 +13,13 @@ export function QuoteForm({
   preset: presetId,
   initialType,
   product,
+  message,
 }: {
   preset?: string;
   initialType?: string;
   product?: string;
+  /** Prefill from the home page's idea bar. */
+  message?: string;
 }) {
   const reduce = useReducedMotion();
   const uid = useId();
@@ -27,7 +30,7 @@ export function QuoteForm({
     contact: "",
     type: initialType && typeOptions.some((o) => o.value === initialType) ? initialType : presetObj?.related[0] ?? "",
     area: "",
-    message: "",
+    message: message?.slice(0, 1500) ?? "",
     website: "",
   });
   const [errors, setErrors] = useState<QuoteErrors>({});

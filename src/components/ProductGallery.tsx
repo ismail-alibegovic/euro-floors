@@ -35,7 +35,7 @@ export function ProductGallery({ images }: { images: { src: string; alt: string 
               onClick={() => setI(k)}
               className={`relative h-20 w-24 overflow-hidden border transition-colors sm:h-24 sm:w-32 ${k === i ? "border-brass" : "border-line hover:border-line-strong"}`}
             >
-              <Image src={im.src} alt="" fill sizes="128px" quality={60} className="object-cover" />
+              <Image src={im.src} alt="" fill sizes="128px" quality={70} className="object-cover" />
             </button>
           ))}
         </div>

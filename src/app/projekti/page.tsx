@@ -35,13 +35,13 @@ export default function ProjectsPage() {
             { kind: "img", item: 1, soft: true },
             { kind: "img", item: 2 },
             { kind: "img", item: 3 },
-            { kind: "empty" },
-            { kind: "text", text: "Široki brodovi smiruju prostor i ističu godove." },
+            { kind: "text", text: "Široki brodovi smiruju prostor i ističu godove.", arrow: true, href: "/kolekcije" },
             { kind: "img", item: 4 },
             { kind: "img", item: 5 },
             { kind: "img", item: 6, soft: true },
             { kind: "img", item: 7 },
             { kind: "img", item: 8 },
+            { kind: "text", text: "Isprobajte tonove i uzorke u istom prostoru.", arrow: true, href: "/vizualizator" },
           ]}
         />
       </section>

@@ -49,7 +49,7 @@ export default async function VisualizerPage({ searchParams }: { searchParams: P
       <section aria-labelledby="soon" className="shell pb-28">
         <div className="grid items-center gap-8 border border-dashed border-line-strong p-6 md:grid-cols-12 md:p-10">
           <div className="relative aspect-[4/3] overflow-hidden md:col-span-4">
-            <Image src="/images/photos/gal-doorway.jpg" alt="" fill sizes="(min-width:768px) 30vw, 90vw" quality={60} className="object-cover opacity-40 grayscale" />
+            <Image src="/images/photos/gal-doorway.jpg" alt="" fill sizes="(min-width:768px) 30vw, 90vw" quality={70} className="object-cover opacity-40 grayscale" />
           </div>
           <div className="md:col-span-7 md:col-start-6">
             <p className="kicker text-brass">Uskoro</p>

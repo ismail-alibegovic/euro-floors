@@ -1,23 +1,18 @@
 import { Hero } from "@/components/home/Hero";
 import { VisualizerSection } from "@/components/home/VisualizerSection";
-import { CollectionGrid } from "@/components/home/CollectionGrid";
-import { MaterialStory } from "@/components/home/MaterialStory";
+import { AboutSection } from "@/components/home/AboutSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { GallerySection } from "@/components/home/GallerySection";
-import { AboutSection } from "@/components/home/AboutSection";
-import { QuoteSection } from "@/components/home/QuoteSection";
 
+/** Home follows the reference's sequence: hero, 01 visualisation, 02 about, 03 offer list, 04 gallery; the footer closes it. */
 export default function Home() {
   return (
     <>
       <Hero />
       <VisualizerSection />
-      <CollectionGrid />
-      <MaterialStory />
+      <AboutSection />
       <ServicesSection />
       <GallerySection />
-      <AboutSection />
-      <QuoteSection />
     </>
   );
 }

@@ -24,7 +24,7 @@ export function PageHeader({
     <header className="relative isolate overflow-hidden border-b border-line">
       {image && (
         <>
-          <Image src={image.src} alt={image.alt} fill priority sizes="100vw" quality={78} className={`hero-img -z-20 object-cover ${image.position ?? ""}`} />
+          <Image src={image.src} alt={image.alt} fill priority sizes="100vw" quality={75} className={`hero-img -z-20 object-cover ${image.position ?? ""}`} />
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(11_9_6/0.9),rgb(11_9_6/0.55)_60%,rgb(11_9_6/0.35)),linear-gradient(0deg,#0b0906,transparent_55%)]" />
         </>
       )}
