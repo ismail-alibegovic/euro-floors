@@ -13,7 +13,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/kolekcije" },
 };
 
-export default function CollectionsPage() {
+export default async function CollectionsPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q } = await searchParams;
   return (
     <>
       <PageHeader
@@ -41,8 +42,8 @@ export default function CollectionsPage() {
           ))}
         </ul>
       </section>
-      <section aria-label="Svi proizvodi" className="shell pb-28 pt-16">
-        <CatalogBrowser />
+      <section id="katalog" aria-label="Svi proizvodi" className="shell scroll-mt-20 pb-28 pt-16">
+        <CatalogBrowser initialQuery={q?.slice(0, 80) ?? ""} />
       </section>
     </>
   );

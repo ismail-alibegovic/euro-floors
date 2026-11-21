@@ -1,112 +1,88 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { nav, secondaryNav, site } from "@/data/site";
-import { SplitText } from "./SplitText";
 import { FitText } from "./FitText";
 import { LogoMark } from "./Logo";
 
+/** Closing frame modelled on the reference: oversized word over fine rules, statement + CTA, dark photo, minimal bar. */
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="grain relative isolate overflow-hidden border-t border-line bg-ink">
-      <Image
-        src="/images/photos/macro-dark-herringbone.jpg"
-        alt=""
-        fill
-        sizes="100vw"
-        quality={70}
-        className="-z-10 object-cover object-bottom opacity-[0.16]"
-      />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/80 to-ink/40" />
-
-      {/* Oversized closing word over fine vertical lines, like the reference's HARMONIZED */}
-      <div className="relative border-b border-line pt-20 md:pt-28" aria-hidden="true">
-        <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgb(238_236_233/0.05)_0_1px,transparent_1px_7px)] [mask-image:linear-gradient(180deg,transparent,#000_55%)]" />
-        <div className="shell relative" data-reveal="">
-          <FitText text="Euro-Floors" estimate="14vw" className="giant -mb-[0.12em] pb-[0.02em]" />
+    <footer className="relative overflow-hidden bg-ink">
+      {/* oversized word over vertical hairlines */}
+      <div className="relative border-b border-line pt-16 md:pt-24" aria-hidden="true">
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgb(238_236_233/0.07)_0_1px,transparent_1px_6px)] [mask-image:linear-gradient(180deg,transparent_10%,#000_70%)]" />
+        <div className="relative px-[1.2vw]" data-reveal="">
+          <FitText text="Parketi – Laminati" estimate="10.8vw" className="giant -mb-[0.1em] pb-[0.04em]" />
         </div>
       </div>
 
-      <div className="shell pt-16 md:pt-24">
-        <div className="grid gap-12 md:grid-cols-12">
-          <SplitText
-            as="p"
-            lines={["Prostor počinje", "ovdje."]}
-            className="headline-xl md:col-span-7"
-          />
-          <div className="flex flex-col justify-end gap-6 md:col-span-4 md:col-start-9 md:items-end md:text-right" data-reveal="">
-            <p className="max-w-sm text-[13px] text-bone/75">
-              Pošaljite nam mjere i ideju. Odgovaramo s prijedlogom poda i ponudom za materijal i ugradnju.
-            </p>
-            <Link href="/kontakt" className="link-arrow w-fit text-[13px]">
-              Zatražite ponudu <ArrowUpRight size={15} strokeWidth={1.25} className="text-brass" />
-            </Link>
-          </div>
-        </div>
-
-        <div data-line="" className="mt-20 h-px w-full bg-line-strong" />
-
-        <div className="grid gap-10 py-14 text-[14px] sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <p className="kicker mb-4">Navigacija</p>
-            <ul className="space-y-1.5">
-              {[{ href: "/", label: "Početna" }, ...nav].map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="inline-block py-2 text-bone/80 hover:text-bone">{n.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="kicker mb-4">Više</p>
-            <ul className="space-y-1.5">
-              {secondaryNav.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="inline-block py-2 text-bone/80 hover:text-bone">{n.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="kicker mb-4">Kontakt</p>
-            <ul className="space-y-1.5 text-bone/80">
-              {site.phones.map((p) => (
-                <li key={p.href}><a className="inline-block py-2 hover:text-bone" href={p.href}>{p.label}</a></li>
-              ))}
-              <li><a className="inline-block py-2 hover:text-bone" href={`mailto:${site.email}`}>{site.email}</a></li>
-            </ul>
-          </div>
-          <div>
-            <p className="kicker mb-4">Gdje smo</p>
-            <p className="text-bone/80">{site.area}, {site.city}<br />Bosna i Hercegovina</p>
-            <p className="mt-3 text-bone/60">{site.hours}</p>
-            <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="link-arrow mt-4 text-bone/80">
-              Facebook <ArrowUpRight size={14} strokeWidth={1.25} className="text-brass" />
-            </a>
-          </div>
+      <div className="grid gap-8 px-[var(--gutter)] pb-14 pt-10 md:grid-cols-2 md:pb-20 md:pt-12 lg:px-[2.4%]">
+        <p className="text-[clamp(2.2rem,4.2vw,4.6rem)] leading-[0.9] tracking-[-0.05em]" data-reveal="">
+          Prostor počinje
+          <br />
+          ovdje.
+        </p>
+        <div className="flex flex-col gap-3 md:items-end md:text-right" data-reveal="">
+          <p className="max-w-[32ch] text-[12px] leading-[1.4] text-bone/75">
+            Pošaljite mjere i ideju — predložit ćemo pod i pripremiti ponudu za materijal i ugradnju.
+          </p>
+          <Link href="/kontakt" className="inline-flex w-fit items-center gap-2 py-2 text-[11.5px] text-bone hover:text-brass">
+            Zatražite ponudu <ArrowUpRight size={15} strokeWidth={1} />
+          </Link>
         </div>
       </div>
 
-      <div className="shell flex items-center justify-between gap-6 border-t border-line py-6">
-        <Link href="/" aria-label="Euro-Floors, početna" className="py-2"><LogoMark className="h-10 w-auto" /></Link>
-        <nav aria-label="Podnožje" className="hidden items-center text-[12px] text-bone/70 md:flex">
+      {/* dark photographic band */}
+      <div className="relative h-[46vh] min-h-[280px] overflow-hidden">
+        <Image
+          src="/images/photos/gal-slat-wall.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={70}
+          className="object-cover object-[50%_60%] brightness-[0.55] saturate-[0.8]"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,#130e0a_0%,rgb(19_14_10/0.15)_40%,rgb(19_14_10/0.6)_100%)]" />
+      </div>
+
+      {/* contact strip */}
+      <div className="grid gap-6 border-t border-line px-[var(--gutter)] py-8 text-[12px] text-bone/70 sm:grid-cols-2 lg:grid-cols-4 lg:px-[2.4%]">
+        <div>
+          <p className="text-bone/40">Telefon</p>
+          {site.phones.map((p) => (
+            <a key={p.href} href={p.href} className="mr-4 inline-block py-1.5 hover:text-bone">{p.label}</a>
+          ))}
+        </div>
+        <div>
+          <p className="text-bone/40">E-mail</p>
+          <a href={`mailto:${site.email}`} className="inline-block py-1.5 hover:text-bone">{site.email}</a>
+        </div>
+        <div>
+          <p className="text-bone/40">Lokacija i radno vrijeme</p>
+          <p className="py-1.5">{site.area}, {site.city} — {site.hoursShort.replace("  ", ", ")}</p>
+        </div>
+        <div className="flex flex-wrap gap-x-4 lg:justify-end">
+          {secondaryNav.map((n) => (
+            <Link key={n.href} href={n.href} className="py-1.5 hover:text-bone">{n.label}</Link>
+          ))}
+          <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="py-1.5 hover:text-bone">Facebook ↗</a>
+        </div>
+      </div>
+
+      {/* bottom bar, like the reference header */}
+      <div className="flex items-center justify-between gap-6 border-t border-line px-[var(--gutter)] py-4 pb-[calc(1rem+var(--safe-bottom))] lg:px-[2.4%]">
+        <Link href="/" aria-label="Euro-Floors, početna" className="py-1"><LogoMark className="h-9 w-auto" /></Link>
+        <nav aria-label="Podnožje" className="hidden items-center text-[11.5px] text-bone/75 md:flex">
           {nav.map((n, i) => (
             <span key={n.href} className="flex items-center">
-              {i > 0 && <span aria-hidden="true" className="mx-4 text-bone/25">/</span>}
+              {i > 0 && <span aria-hidden="true" className="mx-5 text-bone/25">/</span>}
               <Link href={n.href} className="py-2 hover:text-bone">{n.label}</Link>
             </span>
           ))}
         </nav>
-        <Link href="/kontakt" className="link-arrow text-[12px]">Kontakt <ArrowUpRight size={14} strokeWidth={1.25} className="text-brass" /></Link>
-      </div>
-
-      <div className="shell flex flex-col justify-between gap-2 border-t border-line py-6 text-[12px] text-mute sm:flex-row">
-        <p>© {year} Euro-Floors. Sva prava zadržana.</p>
-        <p>
-          Fotografije su ilustrativne —{" "}
-          <Link href="/zasluge" className="underline decoration-line-strong underline-offset-4 hover:text-bone">zasluge</Link>
-        </p>
+        <p className="text-[11px] text-bone/45">© {year} Euro-Floors</p>
       </div>
     </footer>
   );

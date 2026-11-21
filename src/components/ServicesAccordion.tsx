@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import type { Service } from "@/data/services";
@@ -11,6 +11,17 @@ export function ServicesAccordion({ items, initialOpen = 0 }: { items: Service[]
   const reduce = useReducedMotion();
   const base = useId();
 
+  // Open the row named in the URL hash (links from the home page: /usluge#seljacki-pod)
+  useEffect(() => {
+    const open = () => {
+      const i = items.findIndex((s) => `#${s.slug}` === window.location.hash);
+      if (i >= 0) setOpen(i);
+    };
+    open();
+    window.addEventListener("hashchange", open);
+    return () => window.removeEventListener("hashchange", open);
+  }, [items]);
+
   return (
     <ul className="border-t border-line">
       {items.map((s, i) => {
@@ -18,7 +29,7 @@ export function ServicesAccordion({ items, initialOpen = 0 }: { items: Service[]
         const btnId = `${base}-b-${i}`;
         const panelId = `${base}-p-${i}`;
         return (
-          <li key={s.slug} className="border-b border-line">
+          <li key={s.slug} id={s.slug} className="scroll-mt-28 border-b border-line">
             <h3>
               <button
                 id={btnId}

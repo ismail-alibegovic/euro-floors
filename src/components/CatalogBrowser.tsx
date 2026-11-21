@@ -10,11 +10,11 @@ import { presets } from "@/data/visualizer";
 
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "dj");
 
-export function CatalogBrowser({ initialCategory }: { initialCategory?: CategorySlug | "sve" }) {
+export function CatalogBrowser({ initialCategory, initialQuery = "" }: { initialCategory?: CategorySlug | "sve"; initialQuery?: string }) {
   const reduce = useReducedMotion();
   const [cat, setCat] = useState<CategorySlug | "sve">(initialCategory ?? "sve");
   const [species, setSpecies] = useState<string>("sve");
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(initialQuery);
   const [tone, setTone] = useState<string>("sve");
 
   const list = useMemo(() => {

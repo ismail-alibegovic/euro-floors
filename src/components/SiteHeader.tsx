@@ -62,7 +62,7 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label="Glavna navigacija" className="hidden lg:block">
-          <ul className="flex items-center text-[13px] text-bone/80">
+          <ul className="flex items-center text-[12px] text-bone/80">
             {nav.map((item, i) => (
               <li key={item.href} className="flex items-center">
                 {i > 0 && <span aria-hidden="true" className="mx-5 text-bone/25">/</span>}
@@ -79,7 +79,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link href="/kontakt" className="link-arrow hidden text-[13px] lg:inline-flex">
+          <Link href="/kontakt" className="link-arrow hidden text-[12px] lg:inline-flex">
             Kontakt <ArrowUpRight size={15} strokeWidth={1.25} className="text-brass" />
           </Link>
           <button

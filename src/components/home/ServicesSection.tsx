@@ -1,29 +1,72 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { services } from "@/data/services";
-import { SectionIntro } from "../SectionIntro";
-import { ServicesAccordion } from "../ServicesAccordion";
 
+const IMAGES: Record<string, string> = {
+  savjetovanje: "/images/photos/gal-doorway.jpg",
+  nabavka: "/images/photos/macro-walnut-planks.jpg",
+  "masivni-parket": "/images/photos/macro-herringbone.jpg",
+  "seljacki-pod": "/images/photos/gal-dining-oak.jpg",
+  "gotovi-parket": "/images/photos/col-troslojni.jpg",
+  egzoticni: "/images/photos/gal-sunlit-parquet.jpg",
+  "laminat-i-obloge": "/images/photos/col-laminati.jpg",
+};
+
+/** Section 03 — the reference's "Everything in One Place" list: ruled rows, a photo follows the hovered row. */
 export function ServicesSection() {
-  const featured = ["savjetovanje", "nabavka", "masivni-parket", "gotovi-parket", "laminat-i-obloge", "odrzavanje"];
+  const rows = services.filter((s) => IMAGES[s.slug]);
+  const [hover, setHover] = useState<number | null>(null);
+
   return (
-    <section aria-labelledby="svc-title" className="pt-24 md:pt-36">
-      <div className="shell">
-        <SectionIntro
-          index="03"
-          id="svc-title"
-          title={["Od izbora", "do ugradnje."]}
-          aside={
-            <Link href="/usluge" className="link-arrow text-bone/80">
-              Sve usluge <ArrowUpRight size={14} strokeWidth={1.25} className="text-brass" />
-            </Link>
-          }
-          lead="Biramo, nabavljamo, postavljamo i obrađujemo — od masivnog parketa do laminata i lajsni."
-        />
-        <div className="-mt-px">
-          <ServicesAccordion items={services.filter((s) => featured.includes(s.slug))} />
+    <section aria-labelledby="svc-title" className="border-b border-line">
+      <div className="relative grid px-[var(--gutter)] pb-10 pt-16 lg:grid-cols-[22fr_78fr] lg:px-0 lg:pt-20">
+        <span aria-hidden="true" className="index-num lg:pl-[5%]" data-reveal="">03</span>
+        <div className="lg:pr-[3.2%] lg:text-right">
+          <h2 id="svc-title" className="text-[clamp(2rem,3.4vw,3.6rem)] font-normal leading-[0.92] tracking-[-0.045em]" data-reveal="">
+            Sve na jednom
+            <br />
+            mjestu.
+          </h2>
+          <p className="mt-6 max-w-[30ch] text-[12px] leading-[1.4] text-bone/70 lg:ml-auto">
+            Od izbora i nabavke do ugradnje i završne obrade — Euro-Floors vodi cijeli posao oko vašeg poda.
+          </p>
         </div>
       </div>
+
+      <ul className="relative" onMouseLeave={() => setHover(null)}>
+        {rows.map((s, i) => (
+          <li key={s.slug} className="relative border-t border-line" onMouseEnter={() => setHover(i)}>
+            <Link href={`/usluge#${s.slug}`} className="group flex items-center justify-between gap-6 px-[var(--gutter)] py-6 lg:px-[2.4%] lg:py-7">
+              <span className="min-w-0">
+                <span className="block text-[clamp(1.05rem,1.45vw,1.35rem)] tracking-[-0.02em] text-bone transition-colors group-hover:text-brass">{s.title}</span>
+                <span className="mt-1.5 block max-w-[80ch] text-[11.5px] text-bone/60">{s.short}</span>
+              </span>
+              <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1} className="shrink-0 text-bone/60 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brass" />
+            </Link>
+          </li>
+        ))}
+        {/* hover photo (fine pointers only) */}
+        <div aria-hidden="true" className="pointer-events-none absolute right-[8%] top-0 hidden h-full w-[17vw] [@media(hover:hover)_and_(pointer:fine)]:block">
+          {rows.map((s, i) => (
+            <div
+              key={s.slug}
+              className="absolute left-0 w-full overflow-hidden transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{
+                top: `calc(${(i / rows.length) * 100}% - 3.5vw)`,
+                aspectRatio: "4 / 3",
+                opacity: hover === i ? 1 : 0,
+                transform: hover === i ? "scale(1)" : "scale(0.96)",
+              }}
+            >
+              <Image src={IMAGES[s.slug]} alt="" fill sizes="17vw" quality={60} className="object-cover" />
+            </div>
+          ))}
+        </div>
+      </ul>
     </section>
   );
 }

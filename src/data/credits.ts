@@ -1,5 +1,26 @@
-/** Unsplash photos used on the site (Unsplash License). Generated from tools/visualizer/unsplash-credits.json. */
+/** Unsplash photos used on the site (Unsplash License). */
 export const credits = [
+  {
+    "file": "sofa-green.jpg",
+    "author": "Phillip Goldsberry",
+    "authorUrl": "https://unsplash.com/@phillipgold?utm_source=euro_floors&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/green-fabric-sofa-fZuleEfeA1Q?utm_source=euro_floors&utm_medium=referral",
+    "use": "Hero: sofa (izrezana)"
+  },
+  {
+    "file": "hero-palm.jpg",
+    "author": "Pixasquare",
+    "authorUrl": "https://unsplash.com/@pixasquare?utm_source=euro_floors&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/a-black-and-white-photo-of-a-palm-tree-leIgbpNjIMQ?utm_source=euro_floors&utm_medium=referral",
+    "use": "Hero: sjena palme (komponovano)"
+  },
+  {
+    "file": "hero-slats.jpg",
+    "author": "Ria",
+    "authorUrl": "https://unsplash.com/@riapuskas?utm_source=euro_floors&utm_medium=referral",
+    "photoUrl": "https://unsplash.com/photos/dark-brown-wooden-slat-wall-oZzoDW61aoM?utm_source=euro_floors&utm_medium=referral",
+    "use": "Hero: zid od letvica (komponovano)"
+  },
   {
     "file": "hero-living.jpg",
     "author": "Albero Furniture Bratislava",

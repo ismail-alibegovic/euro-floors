@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 
 // Site is dark-only, so one theme-color matches the top of every page.
 export const viewport: Viewport = {
-  themeColor: "#0b0906",
+  themeColor: "#130e0a",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,

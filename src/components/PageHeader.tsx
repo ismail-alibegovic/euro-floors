@@ -25,7 +25,7 @@ export function PageHeader({
       {image && (
         <>
           <Image src={image.src} alt={image.alt} fill priority sizes="100vw" quality={78} className={`hero-img -z-20 object-cover ${image.position ?? ""}`} />
-          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(11_9_6/0.9),rgb(11_9_6/0.55)_60%,rgb(11_9_6/0.35)),linear-gradient(0deg,#0b0906,transparent_55%)]" />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(19_14_10/0.9),rgb(19_14_10/0.55)_60%,rgb(19_14_10/0.35)),linear-gradient(0deg,#130e0a,transparent_55%)]" />
         </>
       )}
       <div className={`shell flex flex-col pb-12 pt-[calc(var(--header-h)+8vh)] md:pb-16 ${image ? "min-h-[78svh] justify-end" : ""}`}>
