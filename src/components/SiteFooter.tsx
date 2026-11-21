@@ -24,7 +24,7 @@ export function SiteFooter() {
       <div className="relative border-b border-line pt-20 md:pt-28" aria-hidden="true">
         <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgb(238_236_233/0.05)_0_1px,transparent_1px_7px)] [mask-image:linear-gradient(180deg,transparent,#000_55%)]" />
         <div className="shell relative" data-reveal="">
-          <FitText text="Bezvremenski" estimate="12.8vw" className="giant -mb-[0.12em] pb-[0.02em]" />
+          <FitText text="Euro-Floors" estimate="14vw" className="giant -mb-[0.12em] pb-[0.02em]" />
         </div>
       </div>
 

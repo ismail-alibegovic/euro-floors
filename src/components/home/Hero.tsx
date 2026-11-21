@@ -88,7 +88,7 @@ export function Hero() {
         {/* Oversized word */}
         <div className="pointer-events-none mt-auto -mb-[0.13em] pt-10" aria-hidden="true">
           <div className="hero-fade" style={{ ["--d" as string]: "600ms" }}>
-            <FitText text="Prirodno" estimate="19.5vw" className="giant pb-[0.02em]" />
+            <FitText text="Parket" estimate="24vw" className="giant pb-[0.02em]" />
           </div>
         </div>
       </div>
