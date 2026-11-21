@@ -130,7 +130,7 @@ export function QuoteForm({
         </div>
         <div>
           <label htmlFor={`${uid}-contact`} className={label}>E-mail ili telefon</label>
-          <input id={`${uid}-contact`} name="contact" autoComplete="email" value={values.contact} onChange={set("contact")} className={field} aria-invalid={!!errors.contact} aria-describedby={errors.contact ? `${uid}-contact-err` : undefined} required />
+          <input id={`${uid}-contact`} name="contact" autoComplete="email" autoCapitalize="none" autoCorrect="off" value={values.contact} onChange={set("contact")} className={field} aria-invalid={!!errors.contact} aria-describedby={errors.contact ? `${uid}-contact-err` : undefined} required />
           {err("contact")}
         </div>
         <div>
@@ -145,7 +145,7 @@ export function QuoteForm({
         </div>
         <div>
           <label htmlFor={`${uid}-area`} className={label}>Približna površina (m²) <span className="normal-case tracking-normal text-bone/35">— neobavezno</span></label>
-          <input id={`${uid}-area`} name="area" inputMode="decimal" value={values.area} onChange={set("area")} className={field} placeholder="npr. 45" aria-invalid={!!errors.area} aria-describedby={errors.area ? `${uid}-area-err` : undefined} />
+          <input id={`${uid}-area`} name="area" inputMode="decimal" enterKeyHint="next" value={values.area} onChange={set("area")} className={field} placeholder="npr. 45" aria-invalid={!!errors.area} aria-describedby={errors.area ? `${uid}-area-err` : undefined} />
           {err("area")}
         </div>
       </div>

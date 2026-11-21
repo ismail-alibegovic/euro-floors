@@ -46,7 +46,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-700 ${
+      className={`fixed inset-x-0 top-0 z-50 pt-[var(--safe-top)] transition-[background-color,border-color] duration-700 ${
         scrolled && !open ? "border-b border-line bg-ink/85 backdrop-blur-md" : "border-b border-transparent"
       }`}
     >
@@ -56,7 +56,7 @@ export function SiteHeader() {
       >
         Preskoči na sadržaj
       </a>
-      <div className="shell hero-fade flex h-[var(--header-h)] items-center justify-between gap-6" style={{ ["--d" as string]: "200ms" }}>
+      <div className="shell flex h-[var(--header-h)] items-center justify-between gap-6">
         <Link href="/" className="relative z-[61] py-3" aria-label="Euro-Floors, početna">
           <Logo />
         </Link>
@@ -106,7 +106,7 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label="Meni"
-            className="fixed inset-0 z-[55] flex flex-col bg-ink-2 pt-[var(--header-h)] lg:hidden"
+            className="fixed inset-0 z-[55] flex h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-ink-2 pt-[calc(var(--header-h)+var(--safe-top))] lg:hidden"
             initial={reduce ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
             animate={reduce ? { opacity: 1 } : { clipPath: "inset(0 0 0% 0)" }}
             exit={reduce ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
@@ -134,7 +134,7 @@ export function SiteHeader() {
                 ))}
               </ul>
             </nav>
-            <div className="shell flex flex-wrap justify-between gap-4 pb-8 text-[13px] text-mute">
+            <div className="shell flex flex-wrap justify-between gap-4 pb-[calc(2rem+var(--safe-bottom))] text-[13px] text-mute">
               <a href={site.phones[0].href} className="py-2">{site.phones[0].label}</a>
               <a href={`mailto:${site.email}`} className="py-2">{site.email}</a>
             </div>

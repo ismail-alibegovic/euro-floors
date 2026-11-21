@@ -21,7 +21,9 @@
 }
 
 :root {
-  --gutter: clamp(16px, 3.2vw, 48px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --gutter: max(clamp(16px, 3.2vw, 48px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   --header-h: 72px;
   color-scheme: dark;
 }
@@ -30,6 +32,7 @@ html {
   background: var(--color-ink);
   color: var(--color-bone);
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent; /* no gray flash on tap; controls have their own :active */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -54,6 +57,30 @@ body {
   line-height: 1.5;
   letter-spacing: -0.006em;
   overflow-x: clip;
+}
+
+/* Controls: instant taps (no double-tap-zoom wait), no long-press text selection on labels */
+button,
+a,
+[role="button"],
+[role="radio"],
+summary {
+  touch-action: manipulation;
+}
+button,
+[role="button"],
+[role="radio"] {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+/* iOS zooms into inputs under 16px and never zooms back */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
 }
 
 ::selection {
@@ -155,7 +182,6 @@ body {
   opacity: 0.5;
   transition: transform 0.6s var(--ease-out-quint), opacity 0.6s;
 }
-.link-arrow:hover::after,
 .link-arrow:focus-visible::after {
   transform: scaleX(1);
   opacity: 1;
@@ -163,7 +189,6 @@ body {
 .link-arrow svg {
   transition: transform 0.45s var(--ease-out-quint);
 }
-.link-arrow:hover svg,
 .link-arrow:focus-visible svg {
   transform: translate(3px, -3px);
 }
@@ -184,21 +209,44 @@ body {
 .btn svg {
   transition: transform 0.45s var(--ease-out-quint);
 }
-.btn:hover svg,
 .btn:focus-visible svg {
   transform: translate(3px, -3px);
 }
-.btn:hover {
-  border-color: var(--color-bone);
+.btn:active {
+  transform: scale(0.98);
+}
+.btn {
+  transition: background-color 0.4s, color 0.4s, border-color 0.4s, transform 120ms var(--ease-out-quint);
 }
 .btn-solid {
   background: var(--color-bone);
   color: var(--color-ink);
   border-color: var(--color-bone);
 }
-.btn-solid:hover {
-  background: var(--color-brass);
-  border-color: var(--color-brass);
+@media (hover: hover) and (pointer: fine) {
+  .link-arrow:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  .link-arrow:hover svg,
+  .btn:hover svg {
+    transform: translate(3px, -3px);
+  }
+  .btn:hover {
+    border-color: var(--color-bone);
+  }
+  .btn-solid:hover {
+    background: var(--color-brass);
+    border-color: var(--color-brass);
+  }
+  .group:hover .media-zoom img {
+    transform: scale(1.035);
+    filter: brightness(1);
+  }
+  .quote-light .btn-solid:hover {
+    background: #8e6a3e;
+    border-color: #8e6a3e;
+  }
 }
 .btn[disabled],
 .btn[aria-disabled="true"] {
@@ -299,7 +347,6 @@ body {
   transition: transform 1.4s var(--ease-out-quint), filter 1s;
   filter: brightness(0.86);
 }
-.group:hover .media-zoom img,
 .group:focus-visible .media-zoom img {
   transform: scale(1.035);
   filter: brightness(1);
@@ -363,10 +410,6 @@ body {
   background: #1b1611;
   color: #eae6df;
   border-color: #1b1611;
-}
-.quote-light .btn-solid:hover {
-  background: #8e6a3e;
-  border-color: #8e6a3e;
 }
 .quote-light :focus-visible {
   outline-color: #8e6a3e;

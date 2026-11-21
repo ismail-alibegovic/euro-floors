@@ -106,7 +106,7 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
           aria-label={expanded ? `Uvećan prikaz: ${current.name}` : undefined}
           className={
             expanded
-              ? "fixed inset-0 z-[80] flex items-center justify-center bg-ink outline-none"
+              ? "fixed inset-0 z-[80] flex h-[100dvh] items-center justify-center overscroll-contain bg-ink pb-[var(--safe-bottom)] pt-[var(--safe-top)] outline-none"
               : "relative"
           }
         >
@@ -172,7 +172,7 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
                   value={split}
                   onChange={(e) => setSplit(Number(e.target.value))}
                   aria-label="Pomjerite granicu između postojećeg i odabranog poda"
-                  className="absolute inset-0 z-[5] h-full w-full cursor-ew-resize opacity-0"
+                  className="absolute inset-0 z-[5] h-full w-full cursor-ew-resize touch-pan-y opacity-0"
                 />
               </>
             )}
@@ -238,7 +238,7 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
             ref={railRef}
             role="radiogroup"
             aria-labelledby={`${headingId ?? "viz"}-label`}
-            className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 sm:px-0 lg:grid lg:grid-cols-3 lg:gap-x-2.5 lg:gap-y-4 lg:overflow-visible lg:px-0"
+            className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 sm:px-0 lg:grid lg:grid-cols-3 lg:gap-x-2.5 lg:gap-y-4 lg:overflow-visible lg:px-0"
           >
             {presets.map((p, i) => {
               const on = p.id === active;
@@ -254,7 +254,7 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
                   tabIndex={on ? 0 : -1}
                   onClick={() => select(p.id)}
                   onKeyDown={onRadioKey}
-                  className="group relative w-[34vw] max-w-[150px] shrink-0 snap-start text-left sm:w-[150px] lg:w-auto lg:max-w-none"
+                  className="group relative w-[34vw] max-w-[150px] shrink-0 snap-start text-left transition-transform duration-150 active:scale-[0.97] sm:w-[150px] lg:w-auto lg:max-w-none"
                 >
                   <span className={`relative block aspect-square overflow-hidden border transition-colors duration-500 ${on ? "border-brass" : "border-line group-hover:border-line-strong"}`}>
                     <Image
@@ -315,7 +315,7 @@ function IconBtn({ label, onClick, children }: { label: string; onClick: () => v
       onClick={onClick}
       aria-label={label}
       title={label}
-      className="flex h-11 w-11 items-center justify-center border border-bone/25 bg-ink/40 backdrop-blur-sm transition-colors hover:border-bone hover:bg-ink/70"
+      className="flex h-11 w-11 items-center justify-center border border-bone/25 bg-ink/40 backdrop-blur-sm transition-[colors,transform] duration-150 hover:border-bone hover:bg-ink/70 active:scale-95 active:bg-ink/80"
     >
       {children}
     </button>

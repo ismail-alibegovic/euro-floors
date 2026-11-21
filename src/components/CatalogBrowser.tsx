@@ -38,7 +38,7 @@ export function CatalogBrowser({ initialCategory }: { initialCategory?: Category
   return (
     <div>
       {/* Filters */}
-      <div className="sticky top-[var(--header-h)] z-30 -mx-[var(--gutter)] border-b border-line bg-ink/90 px-[var(--gutter)] py-4 backdrop-blur-md">
+      <div className="sticky top-[calc(var(--header-h)+var(--safe-top))] z-30 -mx-[var(--gutter)] border-b border-line bg-ink/90 px-[var(--gutter)] py-4 backdrop-blur-md">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div role="group" aria-label="Kategorija" className="no-scrollbar -mx-[var(--gutter)] flex gap-2 overflow-x-auto px-[var(--gutter)] xl:mx-0 xl:px-0">
             <button type="button" aria-pressed={cat === "sve"} onClick={() => setCat("sve")} className={chip(cat === "sve")}>Sve kategorije</button>
@@ -59,7 +59,7 @@ export function CatalogBrowser({ initialCategory }: { initialCategory?: Category
             <label className="relative flex min-h-10 flex-1 items-center border border-line focus-within:border-brass sm:w-64">
               <span className="sr-only">Pretraga</span>
               <Search aria-hidden="true" size={15} strokeWidth={1.25} className="ml-3 text-mute" />
-              <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Pretražite: hrast, 20 mm, klasa 32…" className="w-full bg-transparent px-3 py-2 text-[13px] placeholder:text-bone/35 focus:outline-none" />
+              <input type="search" enterKeyHint="search" autoCapitalize="none" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Pretražite: hrast, 20 mm, klasa 32…" className="w-full bg-transparent px-3 py-2 text-[13px] placeholder:text-bone/35 focus:outline-none" />
               {q && (
                 <button type="button" onClick={() => setQ("")} aria-label="Obriši pretragu" className="mr-1 flex h-8 w-8 items-center justify-center text-mute hover:text-bone"><X size={14} /></button>
               )}

@@ -42,10 +42,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+// Site is dark-only, so one theme-color matches the top of every page.
 export const viewport: Viewport = {
   themeColor: "#0b0906",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
 };
 
 const jsonLd = {

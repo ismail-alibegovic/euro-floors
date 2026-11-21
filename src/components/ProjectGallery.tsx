@@ -116,7 +116,7 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
             role="dialog"
             aria-modal="true"
             aria-label={items[open].title}
-            className="fixed inset-0 z-[90] flex flex-col bg-ink/96 backdrop-blur-sm"
+            className="fixed inset-0 z-[90] flex h-[100dvh] flex-col overscroll-contain bg-ink/96 pb-[var(--safe-bottom)] pt-[var(--safe-top)] backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
