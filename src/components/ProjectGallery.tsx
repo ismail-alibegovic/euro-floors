@@ -40,7 +40,6 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
 
   useEffect(() => {
     if (open === null) return;
-    window.__lenis?.stop();
     document.documentElement.style.overflow = "hidden";
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
@@ -59,7 +58,6 @@ export function ProjectGallery({ items, layout }: { items: GalleryItem[]; layout
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      window.__lenis?.start();
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };

@@ -1,13 +1,14 @@
 import type { MetadataRoute } from "next";
-import { categories, products } from "@/data/catalog";
+import { products } from "@/data/catalog";
 import { site } from "@/data/site";
 
+/**
+ * The site is one page (sections are anchors, which sitemaps do not list), so the home page is the
+ * main entry. Product detail pages stay as standalone URLs for direct links and search engines.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = site.url;
-  const pages = ["", "/kolekcije", "/vizualizator", "/usluge", "/projekti", "/o-nama", "/vodic", "/kontakt"];
   return [
-    ...pages.map((p) => ({ url: `${base}${p}`, changeFrequency: "monthly" as const, priority: p === "" ? 1 : 0.8 })),
-    ...categories.map((c) => ({ url: `${base}/kolekcije/${c.slug}`, priority: 0.7 })),
-    ...products.map((p) => ({ url: `${base}/kolekcije/${p.category}/${p.slug}`, priority: 0.6 })),
+    { url: site.url, changeFrequency: "monthly", priority: 1 },
+    ...products.map((p) => ({ url: `${site.url}/kolekcije/${p.category}/${p.slug}`, priority: 0.6 })),
   ];
 }

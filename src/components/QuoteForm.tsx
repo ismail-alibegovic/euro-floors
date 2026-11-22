@@ -1,35 +1,39 @@
 "use client";
 
-import { useId, useMemo, useState, type FormEvent } from "react";
+import { useEffect, useId, useMemo, useState, type FormEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Check, Loader2, Mail, Phone, X } from "lucide-react";
 import { site } from "@/data/site";
 import { getPreset } from "@/data/visualizer";
+import { useSiteState } from "./SiteState";
 import { typeOptions, validateQuote, type QuoteErrors, type QuoteInput } from "@/lib/quote";
 
 type Status = "idle" | "submitting" | "success" | "not_configured" | "error";
 
-export function QuoteForm({
-  preset: presetId,
-  initialType,
-  product,
-}: {
-  preset?: string;
-  initialType?: string;
-  product?: string;
-}) {
+export function QuoteForm() {
   const reduce = useReducedMotion();
   const uid = useId();
-  const presetObj = getPreset(presetId);
-  const [preset, setPreset] = useState(presetObj);
+  const { quote } = useSiteState();
+  const [preset, setPreset] = useState<ReturnType<typeof getPreset>>(undefined);
+  const [product, setProduct] = useState<string | undefined>(undefined);
   const [values, setValues] = useState<QuoteInput>({
     name: "",
     contact: "",
-    type: initialType && typeOptions.some((o) => o.value === initialType) ? initialType : presetObj?.related[0] ?? "",
+    type: "",
     area: "",
     message: "",
     website: "",
   });
+
+  // Other sections ("Zatražite ponudu" in the visualizer, "Pošaljite upit" in a product) pre-fill the form.
+  useEffect(() => {
+    if (!quote) return;
+    const p = getPreset(quote.preset);
+    setPreset(p);
+    setProduct(quote.product);
+    const type = quote.type && typeOptions.some((o) => o.value === quote.type) ? quote.type : p?.related[0];
+    if (type) setValues((v) => ({ ...v, type }));
+  }, [quote]);
   const [errors, setErrors] = useState<QuoteErrors>({});
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<Status>("idle");

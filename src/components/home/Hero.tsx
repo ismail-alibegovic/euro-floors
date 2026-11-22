@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FitText } from "../FitText";
+import { AnchorLink } from "../AnchorLink";
 import { HeroSearch } from "./HeroSearch";
 
 /**
@@ -10,7 +10,7 @@ import { HeroSearch } from "./HeroSearch";
  */
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
+    <section id="home" aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
       <Image
         src="/images/hero/hero-wall.jpg"
         alt=""
@@ -44,17 +44,17 @@ export function Hero() {
           </div>
           <div className="hero-fade mt-4 flex flex-wrap gap-2 text-[13px] text-bone/80 sm:mt-3 sm:gap-x-5 sm:gap-y-1 sm:text-[11.5px] sm:text-bone/55" style={{ ["--d" as string]: "1150ms" }}>
             {[
-              { href: "/kolekcije", label: "Istražite kolekcije" },
-              { href: "/#vizualizator", label: "Isprobajte pod u svom prostoru" },
+              { id: "kolekcije", label: "Istražite kolekcije" },
+              { id: "vizualizator", label: "Isprobajte pod u svom prostoru" },
             ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
+              <AnchorLink
+                key={l.id}
+                id={l.id}
                 className="inline-flex min-h-10 items-center gap-1.5 border border-white/12 bg-ink/35 px-3.5 backdrop-blur-sm transition-[transform,color] duration-150 active:scale-[0.97] sm:min-h-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-1.5 sm:backdrop-blur-none hover:text-bone"
               >
                 {l.label}
                 <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.25} className="text-brass" />
-              </Link>
+              </AnchorLink>
             ))}
           </div>
         </div>

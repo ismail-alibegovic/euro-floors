@@ -3,7 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { SiteStateProvider } from "@/components/SiteState";
 import { RevealObserver } from "@/components/RevealObserver";
 import { MobileActionBar } from "@/components/MobileActionBar";
 import { site } from "@/data/site";
@@ -88,12 +88,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className="bg-ink text-bone">
-        <SmoothScroll />
-        <RevealObserver />
-        <SiteHeader />
-        <main id="sadrzaj">{children}</main>
-        <SiteFooter />
-        <MobileActionBar />
+        <SiteStateProvider>
+          <RevealObserver />
+          <SiteHeader />
+          <main id="sadrzaj">{children}</main>
+          <SiteFooter />
+          <MobileActionBar />
+        </SiteStateProvider>
       </body>
     </html>
   );

@@ -1,16 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { ArrowUpRight, Plus } from "lucide-react";
+import { scrollToId } from "@/lib/scroll";
+import { useSiteState } from "../SiteState";
 
 /** The reference's prompt bar, made real: searches the catalog (species, spec, category). */
 export function HeroSearch() {
-  const router = useRouter();
+  const { filterCatalog } = useSiteState();
   const [q, setQ] = useState("");
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    router.push(q.trim() ? `/kolekcije?q=${encodeURIComponent(q.trim())}#katalog` : "/kolekcije#katalog");
+    filterCatalog({ q: q.trim().slice(0, 80) });
+    scrollToId("katalog");
   };
   return (
     <form

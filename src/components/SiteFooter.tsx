@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { nav, secondaryNav, site } from "@/data/site";
+import { nav, site } from "@/data/site";
+import { AnchorLink } from "./AnchorLink";
 import { FitText } from "./FitText";
 import { LogoMark } from "./Logo";
 
@@ -28,9 +29,9 @@ export function SiteFooter() {
           <p className="max-w-[32ch] text-[14px] leading-[1.45] text-bone/75 sm:text-[12px] sm:leading-[1.4]">
             Pošaljite mjere i ideju — predložit ćemo pod i pripremiti ponudu za materijal i ugradnju.
           </p>
-          <Link href="/kontakt" className="mt-2 inline-flex min-h-12 w-full items-center justify-between gap-2 bg-bone px-5 text-[14px] text-ink transition-transform duration-150 active:scale-[0.98] sm:mt-0 sm:min-h-0 sm:w-fit sm:justify-start sm:bg-transparent sm:px-0 sm:py-2 sm:text-[11.5px] sm:text-bone hover:text-brass">
-            Zatražite ponudu <ArrowUpRight size={15} strokeWidth={1} />
-          </Link>
+          <AnchorLink id="kontakt" className="mt-2 inline-flex min-h-12 w-full items-center justify-between gap-2 bg-bone px-5 text-[14px] text-ink transition-transform duration-150 active:scale-[0.98] sm:mt-0 sm:min-h-0 sm:w-fit sm:justify-start sm:bg-transparent sm:px-0 sm:py-2 sm:text-[11.5px] sm:text-bone hover:text-brass">
+            Zatražite ponudu <ArrowUpRight aria-hidden="true" size={15} strokeWidth={1} />
+          </AnchorLink>
         </div>
       </div>
 
@@ -64,21 +65,19 @@ export function SiteFooter() {
           <p className="py-1.5">{site.area}, {site.city} — {site.hoursShort.replace("  ", ", ")}</p>
         </div>
         <div className="flex flex-wrap gap-x-4 lg:justify-end">
-          {secondaryNav.map((n) => (
-            <Link key={n.href} href={n.href} className="py-1.5 hover:text-bone">{n.label}</Link>
-          ))}
+          <Link href="/zasluge" className="py-1.5 hover:text-bone">Zasluge za fotografije</Link>
           <a href={site.facebook} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 py-1.5 hover:text-bone">Facebook <ArrowUpRight aria-hidden="true" size={13} strokeWidth={1.25} /></a>
         </div>
       </div>
 
       {/* bottom bar, like the reference header */}
       <div className="flex items-center justify-between gap-6 border-t border-line px-[var(--gutter)] py-4 pb-[calc(1rem+var(--safe-bottom))] lg:px-[2.4%]">
-        <Link href="/" aria-label="Euro-Floors, početna" className="py-1"><LogoMark className="h-9 w-auto" /></Link>
+        <AnchorLink id="home" aria-label="Euro-Floors, početna" className="py-1"><LogoMark className="h-9 w-auto" /></AnchorLink>
         <nav aria-label="Podnožje" className="hidden items-center text-[11.5px] text-bone/75 md:flex">
           {nav.map((n, i) => (
-            <span key={n.href} className="flex items-center">
+            <span key={n.id} className="flex items-center">
               {i > 0 && <span aria-hidden="true" className="mx-5 text-bone/25">/</span>}
-              <Link href={n.href} className="py-2 hover:text-bone">{n.label}</Link>
+              <AnchorLink id={n.id} className="py-2 hover:text-bone">{n.label}</AnchorLink>
             </span>
           ))}
         </nav>

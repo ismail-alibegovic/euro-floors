@@ -1,16 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Columns2, Expand, Minimize2, RotateCcw, Loader2 } from "lucide-react";
 import { DEFAULT_PRESET, getPreset, ORIGINAL_ROOM, presets, ROOM_SIZE } from "@/data/visualizer";
+import { AnchorLink } from "./AnchorLink";
+import { useSiteState } from "./SiteState";
 
 const FADE_MS = 560;
 
 export function FloorVisualizer({ headingId, initial }: { headingId?: string; initial?: string }) {
   const reduce = useReducedMotion();
+  const { viz, prefillQuote } = useSiteState();
   const [active, setActive] = useState(getPreset(initial)?.id ?? DEFAULT_PRESET);
   const [prev, setPrev] = useState<string | null>(null);
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
@@ -46,6 +48,12 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
     [active, reduce],
   );
 
+  // Other sections ("try this floor" from the catalog, deep links) ask for a preset through the shared state.
+  useEffect(() => {
+    if (viz && getPreset(viz.id)) select(viz.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viz?.n]);
+
   const step = (d: number, focus = false) => select(presets[(idx + d + presets.length) % presets.length].id, focus);
 
   const onRadioKey = (e: KeyboardEvent<HTMLButtonElement>) => {
@@ -67,7 +75,6 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
   // Expanded (pseudo-fullscreen) view: works on iOS too, Esc closes, scroll locked.
   useEffect(() => {
     if (!expanded) return;
-    window.__lenis?.stop();
     document.documentElement.style.overflow = "hidden";
     const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape") setExpanded(false);
@@ -77,7 +84,6 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
     window.addEventListener("keydown", onKey);
     figureRef.current?.focus();
     return () => {
-      window.__lenis?.start();
       document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
@@ -295,9 +301,9 @@ export function FloorVisualizer({ headingId, initial }: { headingId?: string; in
         </div>
 
         <div className="mt-auto flex flex-col gap-4 px-4 py-6 sm:px-0 lg:px-6 lg:py-5 xl:px-8">
-          <Link href={`/kontakt?pod=${current.id}`} className="btn btn-solid w-full">
+          <AnchorLink id="kontakt" onClick={() => prefillQuote({ preset: current.id })} className="btn btn-solid w-full">
             Zatražite ponudu <ArrowUpRight size={18} strokeWidth={1.25} />
-          </Link>
+          </AnchorLink>
           <p className="caption text-[11.5px]">
             Ilustrativni prikaz: tekstura stvarnog drveta prenesena je u perspektivu poda, a ostatak fotografije ostaje netaknut.
             Nazivi opisuju izgled, ne konkretan proizvod iz ponude. Boje na ekranu mogu odstupati od uzorka.

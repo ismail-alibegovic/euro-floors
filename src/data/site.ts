@@ -22,16 +22,19 @@ export const site = {
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Vele%C5%A1i%C4%87i%2C%20Sarajevo",
 } as const;
 
+/**
+ * One-page navigation: every primary item is an anchor to a section of "/".
+ * `href` is "/#id" (not "#id") so the same links also work from the few standalone pages
+ * (product detail pages, photo credits), where they lead back to the matching section.
+ */
 export const nav = [
-  { href: "/kolekcije", label: "Kolekcije" },
-  { href: "/vizualizator", label: "Vizualizator" },
-  { href: "/usluge", label: "Usluge" },
-  { href: "/projekti", label: "Projekti" },
-  { href: "/o-nama", label: "O nama" },
+  { id: "home", href: "/#home", label: "Početna" },
+  { id: "kolekcije", href: "/#kolekcije", label: "Kolekcije" },
+  { id: "vizualizator", href: "/#vizualizator", label: "Vizualizator" },
+  { id: "usluge", href: "/#usluge", label: "Usluge" },
+  { id: "o-nama", href: "/#o-nama", label: "O nama" },
+  { id: "vodic", href: "/#vodic", label: "Vodič" },
+  { id: "kontakt", href: "/#kontakt", label: "Kontakt" },
 ] as const;
 
-export const secondaryNav = [
-  { href: "/vodic", label: "Vodič kroz podove" },
-  { href: "/kontakt", label: "Kontakt i ponuda" },
-  { href: "/zasluge", label: "Zasluge za fotografije" },
-] as const;
+export type SectionId = (typeof nav)[number]["id"];

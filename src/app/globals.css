@@ -42,16 +42,11 @@ html {
   font-variant-emoji: text;
 }
 
-/* Lenis */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
+/* Native smooth scrolling for in-page anchors (continuous scroll — no snapping). Reduced motion turns it off below. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -128,6 +123,24 @@ button,
   line-height: 0.92;
   font-size: clamp(2.8rem, 6.4vw, 6.6rem);
   text-wrap: balance;
+}
+/* One heading style for every section title, so the page reads as a single system */
+@utility section-title {
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+  font-size: clamp(2rem, 3.4vw, 3.6rem);
+  text-wrap: balance;
+}
+@utility section-lead {
+  font-size: clamp(14px, 0.5vw + 11px, 16px);
+  line-height: 1.5;
+  color: rgb(238 236 233 / 0.72);
+  text-wrap: pretty;
+}
+/* Anchor target: heading stays clear of the sticky header */
+@utility anchor {
+  scroll-margin-top: calc(var(--header-h) + var(--safe-top));
 }
 @utility kicker {
   font-size: 12px;

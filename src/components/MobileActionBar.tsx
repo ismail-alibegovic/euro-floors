@@ -1,24 +1,24 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Phone } from "lucide-react";
 import { site } from "@/data/site";
+import { AnchorLink } from "./AnchorLink";
 
 /**
  * Phones only: a bottom action bar (call / request a quote) that slides in once the visitor
  * scrolls past the first screen — the two things people actually do on this site from a phone.
- * Hidden on the contact page, where the form is already the whole page.
+ * Hidden once the contact section is in view, where the form is already on screen.
  */
 export function MobileActionBar() {
-  const pathname = usePathname();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const on = () => {
-      const nearEnd = window.innerHeight + window.scrollY > document.documentElement.scrollHeight - 160;
-      setShow(window.scrollY > window.innerHeight * 0.6 && !nearEnd);
+      // hidden on the hero, and once the contact section (the form it points to) is on screen
+      const contact = document.getElementById("kontakt");
+      const atContact = !!contact && contact.getBoundingClientRect().top < window.innerHeight * 0.75;
+      setShow(window.scrollY > window.innerHeight * 0.6 && !atContact);
     };
     on();
     window.addEventListener("scroll", on, { passive: true });
@@ -27,9 +27,7 @@ export function MobileActionBar() {
       window.removeEventListener("scroll", on);
       window.removeEventListener("resize", on);
     };
-  }, [pathname]);
-
-  if (pathname.startsWith("/kontakt")) return null;
+  }, []);
 
   return (
     <div
@@ -47,13 +45,13 @@ export function MobileActionBar() {
           <Phone aria-hidden="true" size={16} strokeWidth={1.25} className="text-brass" />
           Pozovite
         </a>
-        <Link
-          href="/kontakt"
+        <AnchorLink
+          id="kontakt"
           className="flex h-12 flex-[1.4] items-center justify-center gap-2 bg-bone text-[14px] text-ink transition-[transform,background-color] duration-150 active:scale-[0.97] active:bg-brass"
         >
           Zatražite ponudu
           <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
-        </Link>
+        </AnchorLink>
       </div>
     </div>
   );

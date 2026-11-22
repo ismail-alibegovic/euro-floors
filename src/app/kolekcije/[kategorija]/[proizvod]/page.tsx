@@ -32,9 +32,9 @@ export default async function ProductPage({ params }: Params) {
       <div className="shell pt-10">
         <nav aria-label="Putanja" className="text-[12.5px] text-mute">
           <ol className="flex flex-wrap items-center gap-2">
-            <li><Link href="/kolekcije" className="py-1 hover:text-bone">Kolekcije</Link></li>
+            <li><Link href="/#kolekcije" className="py-1 hover:text-bone">Kolekcije</Link></li>
             <li aria-hidden="true" className="text-bone/25">/</li>
-            <li><Link href={`/kolekcije/${c.slug}`} className="py-1 hover:text-bone">{c.name}</Link></li>
+            <li><Link href={`/?kategorija=${c.slug}#kolekcije`} className="py-1 hover:text-bone">{c.name}</Link></li>
             <li aria-hidden="true" className="text-bone/25">/</li>
             <li aria-current="page" className="text-bone/80">{p.name}</li>
           </ol>
@@ -72,7 +72,7 @@ export default async function ProductPage({ params }: Params) {
           <p className="caption mt-6">Navedeni su samo podaci koje objavljujemo u ponudi. Dimenzije, proizvođača i cijenu potvrđujemo uz ponudu.</p>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href={`/kontakt?kategorija=${c.slug}&proizvod=${encodeURIComponent(p.name)}`} className="btn btn-solid flex-1">
+            <Link href={`/?kategorija=${c.slug}&proizvod=${encodeURIComponent(p.name)}#kontakt`} className="btn btn-solid flex-1">
               Pošaljite upit <ArrowUpRight size={18} strokeWidth={1.25} />
             </Link>
             <a href={site.phones[0].href} className="btn">

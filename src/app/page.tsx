@@ -1,17 +1,24 @@
 import { Hero } from "@/components/home/Hero";
-import { VisualizerSection } from "@/components/home/VisualizerSection";
-import { AboutSection } from "@/components/home/AboutSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { CollectionGrid } from "@/components/home/CollectionGrid";
+import { CollectionsSection } from "@/components/sections/CollectionsSection";
+import { VisualizerSection } from "@/components/sections/VisualizerSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { GuideSection } from "@/components/sections/GuideSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { ProductDialog } from "@/components/ProductDialog";
 
+/** One continuous page: hero → collections → visualizer → services → about → guide → contact (→ footer in the layout). */
 export default function Home() {
   return (
     <>
       <Hero />
+      <CollectionsSection />
       <VisualizerSection />
-      <AboutSection />
       <ServicesSection />
-      <CollectionGrid />
+      <AboutSection />
+      <GuideSection />
+      <ContactSection />
+      <ProductDialog />
     </>
   );
 }
